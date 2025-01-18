@@ -56,7 +56,7 @@ Prana uses advanced facial expression and nail analysis to provide you with pers
 
 ## Learn More
 
-To learn more about the project, compatible technologies, and how to get started, check out the [documentation]("C:\Users\DELL\Downloads\Prana  doc.docx").
+To learn more about the project, compatible technologies, and how to get started, check out the [documentation](https://github.com/Jhanviawasthi03/404NotFound-DevQuest/blob/4d78ee0a2a10532f1d10574c927d75c64f40773c/Prana%20%20doc.docx).
 
 ---
 
