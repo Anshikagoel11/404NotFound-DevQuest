@@ -65,7 +65,7 @@ class _ChatScreenState extends State<ChatScreen> {
                         style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
-                          fontSize: 30,
+                          fontSize: 29,
                           fontStyle: FontStyle.italic,
                           letterSpacing: 1.2,
                         ),
