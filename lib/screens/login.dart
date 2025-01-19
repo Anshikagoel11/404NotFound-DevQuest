@@ -2,8 +2,8 @@ import 'dart:convert';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:prana_app/chatbot.dart';
 import 'package:prana_app/screens/signup.dart';
+import 'chat.dart';
 
 final passwordVisibilityProvider = StateProvider<bool>((ref) => true);
 final emailProvider = StateProvider<String>((ref) => '');
@@ -39,7 +39,7 @@ class LoginScreen extends ConsumerWidget {
         if (data['success']) {
           Navigator.pushAndRemoveUntil(
             context,
-            MaterialPageRoute(builder: (context) =>  const ChatScreen()),
+            MaterialPageRoute(builder: (context) =>  const ChatScreen(initialMessage: 'hey',)),
                 (route) => false,
           );
         } else {
