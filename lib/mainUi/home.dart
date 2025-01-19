@@ -1,8 +1,11 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:prana_app/mainUi/chatscreen.dart';
 import 'package:prana_app/mainUi/chattt.dart';
 import 'package:prana_app/mainUi/chatwithprana.dart';
 import 'package:prana_app/splashscreen/loadingscreen.dart';
+
+import '../screens/login.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -28,16 +31,17 @@ class _HomeState extends State<Home> {
     'Step into the future of health assessments. Simply record a short video and let advanced facial analysis reveal precise insights into your well-being. Experience it now.....',
   ];
   final image = [
-    'xyz/img/01.png',
-    'xyz/img/02.png',
-    'xyz/img/03.png',
-    'xyz/img/04.png',
+    'assets/images/01.png',
+    'assets/images/02.png',
+    'assets/images/03.png',
+    'assets/images/04.png',
   ];
   final screens = [
+    ChatScreen(initialMessage: 'Hi! How Can I Help You?'),
     Chatwithprana(),
     Chat(),
-    Home(),
-    Splashscreen(),
+    ChatScreen(initialMessage: 'How can I Help You Today?'),
+
   ];
 
   @override
@@ -88,9 +92,9 @@ class _HomeState extends State<Home> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     const Text(
-                      "Utkarsh Tiwari",
+                      "Prana-Your Health Care",
                       style: TextStyle(
-                        fontSize: 32,
+                        fontSize: 26,
                         fontWeight: FontWeight.w700,
                         color: Colors.white,
                       ),

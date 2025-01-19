@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:prana_app/screens/signup.dart';
+import '../mainUi/home.dart';
 import 'chat.dart';
 
 final passwordVisibilityProvider = StateProvider<bool>((ref) => true);
@@ -39,7 +40,7 @@ class LoginScreen extends ConsumerWidget {
         if (data['success']) {
           Navigator.pushAndRemoveUntil(
             context,
-            MaterialPageRoute(builder: (context) =>  const ChatScreen(initialMessage: 'hey',)),
+            MaterialPageRoute(builder: (context) =>Home()),
                 (route) => false,
           );
         } else {
@@ -151,8 +152,9 @@ class LoginScreen extends ConsumerWidget {
                                 _obscurePassword ? Icons.visibility_off : Icons.visibility,
                                 color: Colors.grey[400],
                               ),
-                              onPressed: () => ref.read(passwordVisibilityProvider.notifier).state =
-                              !_obscurePassword,
+                              onPressed: () => ref
+                                  .read(passwordVisibilityProvider.notifier)
+                                  .state = !_obscurePassword,
                             ),
                           ),
                           onChanged: (value) =>
@@ -171,8 +173,11 @@ class LoginScreen extends ConsumerWidget {
                               ),
                             ),
                             child: isLoading
-                                ? const CircularProgressIndicator(
-                              valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                                ? const Center(
+                              child: CircularProgressIndicator(
+                                valueColor:
+                                AlwaysStoppedAnimation<Color>(Colors.white),
+                              ),
                             )
                                 : const Text(
                               'Login',

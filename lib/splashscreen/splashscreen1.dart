@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:prana_app/screens/login.dart';
-import 'package:prana_app/mainUi/home.dart';
-
-import '../screens/login.dart';
 
 class Splashscreen1 extends StatefulWidget {
   const Splashscreen1({super.key});
@@ -42,15 +39,12 @@ class _Splashscreen1State extends State<Splashscreen1> {
   }
 
   void startProgress() {
-    timer = Timer.periodic(const Duration(seconds: 2), (timer) {
+    timer = Timer.periodic(const Duration(seconds: 3), (timer) {
       if (currentStep < heading.length - 1) {
         setState(() {
           currentStep++;
         });
       } else {
-        setState(() {
-          currentStep++;
-        });
         timer.cancel();
         _navigateToLogin();
       }
@@ -72,7 +66,7 @@ class _Splashscreen1State extends State<Splashscreen1> {
 
   @override
   Widget build(BuildContext context) {
-    final widthh = MediaQuery.sizeOf(context).width;
+    final width = MediaQuery.of(context).size.width;
 
     return Scaffold(
       backgroundColor: Colors.black,
@@ -86,28 +80,25 @@ class _Splashscreen1State extends State<Splashscreen1> {
           ),
           Column(
             children: [
-              SizedBox(height: 60),
+              const SizedBox(height: 60),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  buildProgressBar(0, widthh),
-                  SizedBox(width: 10),
-                  buildProgressBar(1, widthh),
-                  SizedBox(width: 10),
-                  buildProgressBar(2, widthh),
-                  SizedBox(width: 10),
-                  buildProgressBar(3, widthh),
-                ],
+                children: List.generate(heading.length, (index) {
+                  return Row(
+                    children: [
+                      buildProgressBar(index, width),
+                      if (index < heading.length - 1) const SizedBox(width: 10),
+                    ],
+                  );
+                }),
               ),
-              SizedBox(height: 150),
+              const SizedBox(height: 150),
               SizedBox(
-                  width: widthh / 1.5,
-                  child: Image.asset(images[currentStep % images.length])),
-              SizedBox(height: 100),
-              buildTextForStep(0),
-              buildTextForStep(1),
-              buildTextForStep(2),
-              buildTextForStep(3),
+                width: width / 1.5,
+                child: Image.asset(images[currentStep]),
+              ),
+              const SizedBox(height: 100),
+              buildTextForStep(currentStep),
             ],
           ),
         ],
@@ -129,7 +120,7 @@ class _Splashscreen1State extends State<Splashscreen1> {
         borderRadius: BorderRadius.circular(5),
         child: TweenAnimationBuilder(
           tween: Tween<double>(begin: 0, end: progressValue),
-          duration: Duration(seconds: 2),
+          duration: const Duration(seconds: 2),
           builder: (context, value, child) {
             return LinearProgressIndicator(
               value: value,
@@ -143,37 +134,32 @@ class _Splashscreen1State extends State<Splashscreen1> {
   }
 
   Widget buildTextForStep(int step) {
-    bool isVisible = currentStep == step;
-
-    return Visibility(
-      visible: isVisible,
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 40),
-            child: Text(
-              heading[step],
-              style: TextStyle(
-                fontSize: 36,
-                fontWeight: FontWeight.w700,
-                color: Colors.white,
-              ),
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 40),
+          child: Text(
+            heading[step],
+            style: const TextStyle(
+              fontSize: 36,
+              fontWeight: FontWeight.w700,
+              color: Colors.white,
             ),
           ),
-          SizedBox(height: 10),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 50),
-            child: Text(
-              subheading[step],
-              style: TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.w400,
-                color: Colors.white,
-              ),
+        ),
+        const SizedBox(height: 10),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 50),
+          child: Text(
+            subheading[step],
+            style: const TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.w400,
+              color: Colors.white,
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

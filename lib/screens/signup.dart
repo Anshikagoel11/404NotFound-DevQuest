@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
@@ -32,9 +34,10 @@ class SignupScreen extends ConsumerWidget {
 
     const String url = 'https://iitj-devquest.onrender.com/api/v1/users/register';
     final body = {
+      "fullName": fullName,
       "email": email,
       "password": password,
-      "fullName": fullName,
+
     };
 
     try {
@@ -56,7 +59,7 @@ class SignupScreen extends ConsumerWidget {
       }  else {
         final error = jsonDecode(response.body);
         final errorMessage = error["error"] ?? "Signup failed!";
-        print(errorMessage);
+        log(errorMessage);
         ScaffoldMessenger.of(ref.context).showSnackBar(
           SnackBar(content: Text(errorMessage)),
         );
@@ -64,6 +67,7 @@ class SignupScreen extends ConsumerWidget {
     } catch (e) {
       ScaffoldMessenger.of(ref.context).showSnackBar(
         SnackBar(content: Text("Error: $e.")),
+
       );
     } finally {
       ref.read(loadingProvider.notifier).state = false;
